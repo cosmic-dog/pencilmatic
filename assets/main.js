@@ -16,6 +16,10 @@ function removeError(label) {
     hasError = false;
 }
 
+function resizeTextarea(teaxtarea) {
+    teaxtarea.setAttribute("style", "height:" + (teaxtarea.scrollHeight) + "px;overflow-y:hidden;");
+}
+
 function formSubmit(e) {
     let email = document.getElementById('email-field'),
         emailLabel = document.getElementById('email-label'),
@@ -27,11 +31,11 @@ function formSubmit(e) {
     else 
         removeError(emailLabel);
 
-    if (!email.value)
+    if (!message.value)
         setError(messageLabel);
     else 
         removeError(messageLabel);
 
-    if (hasError)
-        e.preventDefault();
+    if (!hasError)
+        document.getElementById('cuform').submit();
 }

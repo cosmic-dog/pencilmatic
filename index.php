@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pencilmatic - Vinyl art graphics services</title>
     <link rel="stylesheet" href="assets/main.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
     <div id="main">
@@ -52,22 +53,27 @@
             <h2 id="form-response">Oops!</h2>
             <p><?php echo $_GET['email-error'] ?></p>
         <?php else : ?>
-            <form action="email/index.php" method="POST" onsubmit="formSubmit(event)">
+            <form id="cuform" action="email/index.php" method="POST">
                 <h2>Contact Us</h2>
                 <div class="form-row">
                     <input type="email" name="email"  id="email-field" onchange="updateField(this)" value="">
                     <label for="email" id="email-label" data-invalid="Email can't be blank" data-valid="Email">Email</label>
                 </div>
                 <div class="form-row">
-                    <input type="text" name="message"  id="message-field" onchange="updateField(this)" value="">
+                    <!-- <input type="text" name="message"  id="message-field" onchange="updateField(this)" value=""> -->
+                    <textarea name="message"  id="message-field" onchange="updateField(this)" onkeydown="resizeTextarea(this)" value="" rows="1" maxlength="1000"></textarea>
                     <label for="message" id="message-label" data-invalid="Message can't be blank" data-valid="Message">Message</label>
                 </div>
                 <div class="form-row-btn">
-                    <button>Send</button>
+                    <button class="g-recaptcha" 
+                            data-sitekey="6LfWKnAdAAAAANSyrlwwSPK4_zBOvsFY7baOHnso" 
+                            data-callback="formSubmit" 
+                            data-action="submit">Send</button>
                 </div>
             </form>
+
+            <script src="assets/main.js"></script>
         <?php endif; ?>
     </div>
-    <script src="assets/main.js"></script>
 </body>
 </html>
